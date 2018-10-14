@@ -1,0 +1,51 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+
+  <view class="page__bd">
+    <view>
+      <label class='weui-cells__title'>昵称：</label>
+      <label>{{nickName}}</label>
+      <label hidden='{{target.hasNickName?true:false}}'>
+        <button size='mini' type="primary" open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">获取昵称</button>
+      </label>
+    </view>
+    <view>
+      <label class='weui-cells__title'>位置：</label>
+      <label>{{location}}</label>
+      <label hidden='{{target.hasLocation?true:false}}'>
+        <button size='mini' type="primary" bindtap="getLocation">选择位置</button>
+        <button style='float:right' size='mini' type="primary" open-type='openSetting' bindopensetting='getLocation'>授权</button>
+      </label>
+    </view>
+
+    <view class="weui-cells__title">记一笔</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input class="weui-input" bindinput='titleInput' placeholder="这里是标题" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">写点什么</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" maxlength='255' bindinput='contentInput' placeholder="该输入内容了" />
+          <!--  -->
+          <view class="weui-textarea-counter">{{wordNum}}/255</view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
+    </view>
+    <view class="weui-footer  weui-footer_fixed-bottom">
+      <view class="weui-footer__text">
+        <view style='width:100%;height:100%;text-align:center;opacity:0.3;filter:alpha(opacity=30);' class="picture-2">
+          <image style='width:100rpx;height:90rpx;' class="infoImage" src="/resource/image/kiss.png" mode='widthFix'>
+          </image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
