@@ -1,0 +1,64 @@
+<view class="page">
+  <view class="page__hd">
+    <view style='width:100%;height:100%;text-align:center;' class="picture-2">
+      <image style='width:100rpx;height:90rpx;' class="infoImage" src="/resource/image/love.png" mode='widthFix'>
+      </image>
+      <text style='line-height:1.5;margin:5px;'> To jüJü</text>
+    </view>
+    <view class="page__title" style='color:#353535'>记仇</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd" style='padding:5px 15px 2px;'>
+        <view class="weui-flex weui-cell_input weui-cell_vcode">
+          <view class="weui-cell__bd" style='margin-top:4px;' wx:if="{{!isSearch}}">
+            <swiper class="swiper_container " vertical="true" autoplay="true" circular="true" interval="2000">
+              <block wx:for="{{msgList}}">
+                <navigator class='clearfix' url="/pages/index/index?title={{item.url}}" open-type="navigate">
+                  <swiper-item>
+                    <view class="swiper_item">{{item.title}}</view>
+                  </swiper-item>
+                </navigator>
+              </block>
+            </swiper>
+          </view>
+          <view class="weui-cell__bd" wx:if="{{isSearch}}">
+            <input class="head_srch clearfix" bindinput='searchInput' placeholder="搜索一下回忆" />
+          </view>
+          <view class="weui-flex ">
+            <view class='head_btn ' bindtap='searchMemoirs'>
+              <icon color='{{noneSearch=="search"?"#FFF":"#000"}}' type="{{noneSearch}}" size="15"></icon>
+            </view>
+            <view class='head_btn ' bindtap='addContent'>
+              <icon style='transform:rotate(45deg);' color='#FFF' type="cancel" size="15"></icon>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text" wx:for="{{datas}}" wx:key="value">
+          <cover-view class="weui-media-box__title weui-media-box__title_in-text" id='{{item.id}}' bindlongpress='delError'>
+            {{item.title}}
+          </cover-view>
+          <view class="weui-media-box__desc" style="{{contentStyle}}" data-index='{{index}}' bindtap='showMore'>{{item.content}}</view>
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta">{{item.username}}</view>
+            <view class="weui-media-box__info__meta">{{ item.creat_time }}</view>
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{ item.location }}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-loadmore weui-loadmore_line" wx:if="{{isEnd==true}}">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style='background-color:transparent;'>已加载完成</view>
+    </view>
+  </view>
+  <view class="weui-footer  weui-footer_fixed-bottom">
+    <view class="weui-footer__text">
+      <view style='width:100%;height:100%;text-align:center;opacity:0.3;filter:alpha(opacity=30);' class="picture-2">
+        <image style='width:100rpx;height:90rpx;' class="infoImage" src="/resource/image/kiss.png" mode='widthFix'>
+        </image>
+      </view>
+    </view>
+  </view>
+</view>

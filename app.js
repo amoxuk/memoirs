@@ -6,6 +6,7 @@ App({
   globalData: {
     openid: null
   },
+  
   onLaunch: function() {
     this.getuid()
   },

@@ -7,14 +7,26 @@
     </view>
     <view class="page__title" style='color:#353535'>记仇</view>
   </view>
+  <!-- <view class="page__bd" wx:if="{{!isSearch}}">
+    <view class="weui-tab" style='padding-bottom:10px'>
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="background-color:;left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
 
+    </view>
+  </view> -->
   <view class="page__bd">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd" style='padding:5px 15px 2px;'>
-        <view class="weui-flex weui-cell_input weui-cell_vcode" >
+        <view class="weui-flex weui-cell_input weui-cell_vcode">
           <view class="weui-cell__bd" style='margin-top:4px;' wx:if="{{!isSearch}}">
-          <swiper class="swiper_container " vertical="true" autoplay="true" circular="true" interval="2000" >
-              <block  wx:for="{{msgList}}" >
+            <swiper class="swiper_container " vertical="true" autoplay="true" circular="true" interval="2000">
+              <block wx:for="{{msgList}}">
                 <navigator class='clearfix' url="/pages/index/index?title={{item.url}}" open-type="navigate">
                   <swiper-item>
                     <view class="swiper_item">{{item.title}}</view>
@@ -23,7 +35,7 @@
               </block>
             </swiper>
           </view>
-          <view class="weui-cell__bd"  wx:if="{{isSearch}}">
+          <view class="weui-cell__bd" wx:if="{{isSearch}}">
             <input class="head_srch clearfix" bindinput='searchInput' placeholder="搜索一下回忆" />
           </view>
           <view class="weui-flex ">
@@ -50,8 +62,9 @@
         </view>
       </view>
     </view>
-    <view class='weui-media-box__info' style='text-align:center' wx:if="{{isEnd==true}}">已加载完成</view>
-
+    <view class="weui-loadmore weui-loadmore_line" wx:if="{{isEnd==true}}">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style='background-color:transparent;'>已加载完成</view>
+    </view>
   </view>
   <view class="weui-footer  weui-footer_fixed-bottom">
     <view class="weui-footer__text">
