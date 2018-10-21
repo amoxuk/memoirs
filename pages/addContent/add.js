@@ -46,6 +46,7 @@ Page({
       fail: function(res) {
         console.log(res)
         wx.showModal({
+          confirmColor: '#ed6b9f',
           title: "地址获取失败，点击选择位置获取"
         })
       }
@@ -68,22 +69,24 @@ Page({
             url: '/pages/index/index',
           })
           return
-        }
-        wx.showModal({
-          title: "发布结果",
-          content: res.data.msg,
-          cancelText: '取消发布',
-          confirmText: '修改发布',
-          success(res) {
-            if (res.confirm) {
-              console.log("close dialog")
-            } else {
-              wx.navigateTo({
-                url: '/pages/index/index',
-              })
+        }else{
+          wx.showModal({
+            title: "发布结果",
+            content: res.data.msg,
+            cancelText: '取消发布',
+            confirmText: '修改发布',
+            confirmColor: '#ed6b9f',
+            success(res) {
+              if (res.confirm) {
+                console.log("close dialog")
+              } else {
+                wx.navigateTo({
+                  url: '/pages/index/index',
+                })
+              }
             }
-          }
-        })
+          })
+        }
       }
     })
   },

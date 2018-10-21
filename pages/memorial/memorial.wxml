@@ -1,19 +1,79 @@
+<wxs module="m1">
+  var msg = function(num) {
+    return Math.abs(num);
+  }
+
+  module.exports.message = msg;
+</wxs>
 <view class="page">
-  <view class="page__hd">
-    <view style='width:100%;height:100%;text-align:center;' class="picture-2">
-      <image style='width:100rpx;height:90rpx;' class="infoImage" src="/resource/image/love.png" mode='widthFix'>
-      </image>
-      <text style='line-height:1.5;margin:5px;'> To jüJü</text>
-    </view>
-    <view class="page__title" style='color:#353535'>记仇</view>
-  </view>
   <view class="page__bd">
     <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd ">
+        <view class='flex-wrp'>
+          <view class=" flex-start">今天是</view>
+          <view class=' flex-end'>农历 {{lunarDay}}</view>
+        </view>
+        <view class='flex-wrp flex-center main-today'>{{today}}</view>
+      </view>
+      <!--  -->
+      <block>
+        <view class="commodity_screen" bindtap="hideModal" catchtouchmove='forbidMove' wx:if="{{showModalStatus}}"></view>
+        <view animation="{{animationData}}" class="commodity_attr_box" catchtouchmove='forbidMove' wx:if="{{showModalStatus}}">
+          <view class="weui-cells__title">新增纪念日</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">*昵称</view>
+              </view>
+              <view class="weui-cell__bd">
+                <view hidden='{{nickName?false:true}}' class='weui-input'>{{nickName}}</view>
+                <view hidden='{{nickName?true:false}}'>
+                  <button class='weui-vcode-btn' size='mini' type="primary" open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">获取昵称</button>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">*纪念日</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" bindinput='titleInput' placeholder="请输入名称" />
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">*日期</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="date" value="{{dates}}" bindchange="bindDateChange">
+                <view class="weui-input">{{dates}}</view>
+              </picker>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_input weui-cell_vcode">
+            <view class="weui-cell__hd">
+              <view class="weui-label">备注</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" bindinput='remarkInput' placeholder="请输入需要的备注" />
+            </view>
+
+          </view>
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" bindtap="showTopTips">确定</button>
+          </view>
+        </view>
+      </block>
+      <!--  -->
       <view class="weui-panel__hd" style='padding:5px 15px 2px;'>
         <view class="weui-flex weui-cell_input weui-cell_vcode">
           <view class="weui-cell__bd" style='margin-top:4px;' wx:if="{{!isSearch}}">
             <swiper class="swiper_container " vertical="true" autoplay="true" circular="true" interval="2000">
-              <block wx:for="{{msgList}}">
+              <block wx:for="{{msgList}}" wx:key="item">
                 <navigator class='clearfix' url="/pages/index/index?title={{item.url}}" open-type="navigate">
                   <swiper-item>
                     <view class="swiper_item">{{item.title}}</view>
@@ -29,26 +89,52 @@
             <view class='head_btn ' bindtap='searchMemoirs'>
               <icon color='{{noneSearch=="search"?"#FFF":"#000"}}' type="{{noneSearch}}" size="15"></icon>
             </view>
-            <view class='head_btn ' bindtap='addContent'>
+            <view class='head_btn ' bindtap='showModal'>
               <icon style='transform:rotate(45deg);' color='#FFF' type="cancel" size="15"></icon>
             </view>
           </view>
         </view>
       </view>
       <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text" wx:for="{{datas}}" wx:key="value">
-          <cover-view class="weui-media-box__title weui-media-box__title_in-text" id='{{item.id}}' bindlongpress='delError'>
-            {{item.title}}
-          </cover-view>
-          <view class="weui-media-box__desc" style="{{contentStyle}}" data-index='{{index}}' bindtap='showMore'>{{item.content}}</view>
+        <view class="weui-media-box weui-media-box_text" wx:for="{{datas}}" wx:key="item">
+          <view class="weui-media-box__desc weui-media-box__title_in-text" id='{{item.id}}'>
+            <view class='flex-wrp flex-start'>
+              <block wx:if="{{item.days === 0?true:false}}">
+                <view class='' style='color:#f00;padding:0 0.5em 0 0.5em;'>
+                  今天是
+                </view>
+              </block>
+              <block wx:else>
+                <view class=' '>
+                  {{item.annivesary?'距'+item.annivesary:"还有"}}
+                </view>
+                <view class='' style='color:#f00;padding:0 0.5em 0 0.5em;'>
+                  {{item.days}}
+                </view>
+                <view class=''>
+                  天
+                </view>
+              </block>
+            </view>
+          </view>
+          <view class="weui-media-box__title  weui-media-box__title_in-text" style="{{contentStyle}}" data-index='{{index}}' bindtap='showMore' bindlongpress='delError'>
+            <view class='flex-wrp'>
+              <view class='flex-wrp flex-start' style='margin-left:1em'>
+                {{item.title}}
+              </view>
+              <view class='flex-wrp flex-end' style='color:{{item.to_annivesary>0?"#7908aa":"#ff7600"}}'>
+                {{m1.message(item.to_annivesary)}}
+              </view>
+            </view>
+          </view>
           <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">{{item.username}}</view>
-            <view class="weui-media-box__info__meta">{{ item.creat_time }}</view>
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{ item.location }}</view>
+            <view class="weui-media-box__info__meta" style='color:#408dd2;font-size:15px'>{{item.memory_time}}</view>
+            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{ item.user }}</view>
           </view>
         </view>
       </view>
     </view>
+
     <view class="weui-loadmore weui-loadmore_line" wx:if="{{isEnd==true}}">
       <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style='background-color:transparent;'>已加载完成</view>
     </view>
@@ -61,4 +147,5 @@
       </view>
     </view>
   </view>
+
 </view>

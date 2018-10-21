@@ -1,23 +1,25 @@
 {
   "pages": [
+    "pages/memorial/memorial",
     "pages/index/index",
     "pages/addCgi/addCgi",
-    "pages/addContent/add",
-    "pages/memorial/memorial"
+    "pages/addContent/add"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#ED6B9F",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#ED6B9F",
     "navigationBarTitleText": "Amoxuk",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true,
     "onReachBottomDistance": true
   },
-  
   "tabBar": {
     "position":"top",
-    "backgroundColor": "#f6f6f6",
+    "backgroundColor":"#ED6B9F",
+    "color":"#FFF", 
+    "selectedColor":"#FFF", 
+    "borderStyle": "white", 
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -29,5 +31,4 @@
       }
     ]
   }
-  
 }

@@ -20,25 +20,9 @@ Page({
     searchText: "",
     isSearch:false,
     noneSearch:"search",
-    //contentStyle: "overflow:none;text-overflow:none ;display: block;"
-    //contentStyle: "overflow:hidden;text-overflow: ellipsis;display: -webkit - box;",
-    //TAB
-    // tabs: ["记仇", "纪念日"],
-    // tabUrls: ['/pages/index/index', "/pages/memorial/memorial"],
-    // activeIndex: 0,
-    // sliderOffset: 0,
-    // sliderLeft: 0
   },
   onLoad: function(e) {
     var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
-          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
-        });
-      }
-    });
     console.log(e.title)
     this.setData({
       msgList: [{
@@ -163,6 +147,7 @@ Page({
     if (app.globalData.openid != null) {
       wx.showModal({
         title: '确认删除？',
+        confirmColor: '#ed6b9f',
         content: '是否删除当前内容',
         confirmText: '删除',
         cancelText: '取消',

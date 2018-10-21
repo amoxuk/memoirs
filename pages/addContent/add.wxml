@@ -1,7 +1,7 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
 
   <view class="page__bd">
-    <view>
+    <view style='padding-top:5px;'>
       <label class='weui-cells__title'>昵称：</label>
       <label>{{nickName}}</label>
       <label hidden='{{target.hasNickName?true:false}}'>

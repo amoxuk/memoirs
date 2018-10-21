@@ -34,3 +34,21 @@ page{
     text-align: left;
     font-size: 14px;
 }
+.weui-btn {
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #ed6b9f !important;
+}
+
+.button-hover {
+  color: rgba(0, 0, 0, 0.5);
+  background-color: #ed6b9f !important;
+}
+
+button[type=primary] {
+  color: #fff;
+  background-color: #ed6b9f;
+}
+button {
+  color: #fff;
+  background-color: #ed6b9f;
+}
